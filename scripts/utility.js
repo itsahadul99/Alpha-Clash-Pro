@@ -28,20 +28,7 @@ function removeBackgroundColor(elementId){
 
 // keyboard handler
 
-function handleKeyboardPress(e){
-    const playerPressed = e.key;
-    // get expected to press 
-    const displayAlphabet = document.getElementById('display');
-    // console.log(displayAlphabet.innerText);
-    const expectedAlphabet = displayAlphabet.innerText.toLowerCase();
-    // console.log(expectedAlphabet, playerPressed);
-
-    // check matched or not
-    if(playerPressed === expectedAlphabet){
-        removeBackgroundColor(expectedAlphabet);
-        continueGame();
-        
-    }else{
-        console.log('You lost your one life ');
-    }
+function getElementById (elementId){
+    const element = document.getElementById(elementId);
+    return element;
 }
