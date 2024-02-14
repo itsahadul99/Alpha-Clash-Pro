@@ -32,3 +32,14 @@ function getElementById (elementId){
     const element = document.getElementById(elementId);
     return element;
 }
+function getTextElementById (elementId){
+    const idElement = document.getElementById(elementId);
+    const elementText = idElement.innerText;
+    const element = parseInt(elementText);
+    return element;
+}
+
+function setValueElementById(elementid, value){
+    const element = document.getElementById(elementid);
+    element.innerText = value;
+}

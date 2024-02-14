@@ -1,9 +1,26 @@
 function play(){
+    // hide everything only show playground
     hideElementById('home-screen');
     showElementById('play-ground');
+    hideElementById('final-score');
+    // reset all value 
+    setValueElementById('life', 5);
+    setValueElementById('current-score', 0);
     continueGame();
 }
+function gameOver(){
+    showElementById('final-score');
+    hideElementById('play-ground');
+    const lastScore = getElementById('current-score');
+    const final = document.getElementById('final');
+    final.innerText = lastScore.innerText;
 
+    // remove the last element highlight 
+    const lastAlphabet = getElementById('display');
+    const lastAlphabets = lastAlphabet.innerText;
+    removeBackgroundColor(lastAlphabets)
+
+}
 function continueGame(){
     const alphabet = generateRandomAlphabets();
     const display = document.getElementById('display');
@@ -59,6 +76,10 @@ document.addEventListener('keyup', handleKeyboardPress);
 // using reusable function
 function handleKeyboardPress(e){
     const playerPressed = e.key;
+    // special keypress 
+    if(playerPressed === 'Escape'){
+        gameOver();
+    }
     const currentAlphabet =  getElementById('display');
     const expectedAlphabet = currentAlphabet.innerText.toLowerCase();
     if(playerPressed === expectedAlphabet){
@@ -67,7 +88,9 @@ function handleKeyboardPress(e){
         const currentScoreText = currentScoreElement.innerText;
         const currentScore = parseInt(currentScoreText);
         const newScore = currentScore + 1;
+        // console.log(newScore);
         currentScoreElement.innerText = newScore;
+        // setValueElementById('current-score', newScore);
         // matched then remove current background color and continue game
         removeBackgroundColor(expectedAlphabet);
         continueGame();
@@ -77,6 +100,11 @@ function handleKeyboardPress(e){
         const currentLifeLineText = currentLifeLineElement.innerText;
         const currentLifeLine = parseInt(currentLifeLineText);
         const newLifeLine = currentLifeLine - 1;
+        // console.log(currentLifeLine);
         currentLifeLineElement.innerText = newLifeLine;
+        // setValueElementById('life', newLifeLine);
+        if(newLifeLine === 0){
+            gameOver();
+        }
     }
 }
