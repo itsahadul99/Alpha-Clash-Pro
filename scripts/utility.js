@@ -20,12 +20,10 @@ function generateRandomAlphabets (){
 function setBackgroundColor(elementId){
     const element = document.getElementById(elementId);
     element.classList.add('bg-orange-400');
-    return element;
 }
 function removeBackgroundColor(elementId){
     const element = document.getElementById(elementId);
     element.classList.remove('bg-orange-400');
-    return element;
 }
 
 // keyboard handler
@@ -40,7 +38,9 @@ function handleKeyboardPress(e){
 
     // check matched or not
     if(playerPressed === expectedAlphabet){
+        removeBackgroundColor(expectedAlphabet);
         continueGame();
+        
     }else{
         console.log('You lost your one life ');
     }
