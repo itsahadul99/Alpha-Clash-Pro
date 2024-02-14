@@ -8,5 +8,7 @@ function continueGame(){
     const alphabet = generateRandomAlphabets();
     const display = document.getElementById('display');
     display.innerText = alphabet;
-    setBackgroundColor(alphabet)
+    setBackgroundColor(alphabet);
 }
+
+document.addEventListener('keyup', handleKeyboardPress)

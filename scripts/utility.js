@@ -19,6 +19,29 @@ function generateRandomAlphabets (){
 }
 function setBackgroundColor(elementId){
     const element = document.getElementById(elementId);
-    element.style.backgroundColor = 'gold';
+    element.classList.add('bg-orange-400');
     return element;
+}
+function removeBackgroundColor(elementId){
+    const element = document.getElementById(elementId);
+    element.classList.remove('bg-orange-400');
+    return element;
+}
+
+// keyboard handler
+
+function handleKeyboardPress(e){
+    const playerPressed = e.key;
+    // get expected to press 
+    const displayAlphabet = document.getElementById('display');
+    // console.log(displayAlphabet.innerText);
+    const expectedAlphabet = displayAlphabet.innerText.toLowerCase();
+    // console.log(expectedAlphabet, playerPressed);
+
+    // check matched or not
+    if(playerPressed === expectedAlphabet){
+        continueGame();
+    }else{
+        console.log('You lost your one life ');
+    }
 }
