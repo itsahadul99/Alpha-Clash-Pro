@@ -1,4 +1,5 @@
 function play(){
+    isAudioON = true;
     // hide everything only show playground
     hideElementById('home-screen');
     showElementById('play-ground');
@@ -19,6 +20,7 @@ function gameOver(){
     const lastAlphabet = getElementById('display');
     const lastAlphabets = lastAlphabet.innerText;
     removeBackgroundColor(lastAlphabets)
+    isAudioON = false;
 
 }
 function continueGame(){
@@ -72,10 +74,14 @@ document.addEventListener('keyup', handleKeyboardPress);
 
 //     }
 // }
-
+const audio = new Audio();
+let isAudioON = false;
 // using reusable function
 function handleKeyboardPress(e){
     const playerPressed = e.key;
+    if(isAudioON === false) return;
+    audio.src = "../audio/success.mp3";
+    audio.play();
     // special keypress 
     if(playerPressed === 'Escape'){
         gameOver();
@@ -97,6 +103,8 @@ function handleKeyboardPress(e){
     }
     else{
         const currentLifeLineElement = getElementById('life');
+        audio.src = "../audio/wrong.mp3";
+        audio.play()
         const currentLifeLineText = currentLifeLineElement.innerText;
         const currentLifeLine = parseInt(currentLifeLineText);
         const newLifeLine = currentLifeLine - 1;
