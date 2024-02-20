@@ -1,4 +1,4 @@
-function play(){
+function play() {
     isAudioON = true;
     // hide everything only show playground
     hideElementById('home-screen');
@@ -9,7 +9,7 @@ function play(){
     setValueElementById('current-score', 0);
     continueGame();
 }
-function gameOver(){
+function gameOver() {
     showElementById('final-score');
     hideElementById('play-ground');
     const lastScore = getElementById('current-score');
@@ -21,9 +21,10 @@ function gameOver(){
     const lastAlphabets = lastAlphabet.innerText;
     removeBackgroundColor(lastAlphabets)
     isAudioON = false;
+    artBoard.style.backgroundImage = 'none'
 
 }
-function continueGame(){
+function continueGame() {
     const alphabet = generateRandomAlphabets();
     const display = document.getElementById('display');
     display.innerText = alphabet;
@@ -57,7 +58,7 @@ document.addEventListener('keyup', handleKeyboardPress);
 //         // next round
 //         removeBackgroundColor(expectedAlphabet);
 //         continueGame();
-        
+
 //     }else{
 //         // Life line:
 //         // 1. show the current life line
@@ -69,26 +70,27 @@ document.addEventListener('keyup', handleKeyboardPress);
 //         // 3. show the new life line
 //         lifeLineElement.innerText = newLifeLine;
 //         if(newLifeLine === 0){
-            
+
 //         }
 
 //     }
 // }
 const audio = new Audio();
 let isAudioON = false;
+const artBoard = document.getElementById('art-board');
 // using reusable function
-function handleKeyboardPress(e){
+function handleKeyboardPress(e) {
     const playerPressed = e.key;
-    if(isAudioON === false) return;
-    audio.src = "../audio/success.mp3";
+    if (isAudioON === false) return;
+    audio.src = "./audio/success.mp3";
     audio.play();
     // special keypress 
-    if(playerPressed === 'Escape'){
+    if (playerPressed === 'Escape') {
         gameOver();
     }
-    const currentAlphabet =  getElementById('display');
+    const currentAlphabet = getElementById('display');
     const expectedAlphabet = currentAlphabet.innerText.toLowerCase();
-    if(playerPressed === expectedAlphabet){
+    if (playerPressed === expectedAlphabet) {
         // Score update 
         const currentScoreElement = getElementById('current-score');
         const currentScoreText = currentScoreElement.innerText;
@@ -101,17 +103,21 @@ function handleKeyboardPress(e){
         removeBackgroundColor(expectedAlphabet);
         continueGame();
     }
-    else{
+    else {
         const currentLifeLineElement = getElementById('life');
-        audio.src = "../audio/wrong.mp3";
+        audio.src = "./audio/wrong.mp3";
         audio.play()
         const currentLifeLineText = currentLifeLineElement.innerText;
         const currentLifeLine = parseInt(currentLifeLineText);
         const newLifeLine = currentLifeLine - 1;
+        // art board background color change
+        let colorPercentage = (newLifeLine / 5) * 100;
+        console.log(colorPercentage);
+        artBoard.style.backgroundImage = `linear-gradient(#FFFFFFB3 ${colorPercentage}%,red)`
         // console.log(currentLifeLine);
         currentLifeLineElement.innerText = newLifeLine;
         // setValueElementById('life', newLifeLine);
-        if(newLifeLine === 0){
+        if (newLifeLine === 0) {
             gameOver();
         }
     }
